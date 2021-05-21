@@ -2,10 +2,10 @@ version: '3'
 
 services:
   db:
-    container_name: postgres_db
+    container_name: postgres_db_users
     image: postgres:13
     ports:
-      - 5431:5432
+      - 5435:5432
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1234
@@ -14,7 +14,7 @@ services:
       - pgdata:/var/lib/postgresql/data
 
   api:
-    container_name: compose-api
+    container_name: spring_api_users
     build:
       context: .
       dockerfile: Dockerfile.multi
@@ -24,8 +24,10 @@ services:
       DB_USER: postgres
       DB_PASSWORD: 1234
       DB_NAME: postgres
-      DB_HOST: postgres_db
+      DB_HOST: postgres_db_users
       DB_PORT: 5432
+      JJ_SECRET: secret_key
+      JJ_EXPIRATION: 1000000000
 
 volumes:
   pgdata:
