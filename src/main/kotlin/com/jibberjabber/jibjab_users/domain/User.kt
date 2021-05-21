@@ -5,8 +5,8 @@ import javax.persistence.*
 @Table(name = "user_data")
 @Entity
 class User(
-    var username: String,
-    var email: String,
+    @Column(unique = true) var username: String,
+    @Column(unique = true) var email: String,
     var password: String,
     var firstName: String,
     var lastName: String,
