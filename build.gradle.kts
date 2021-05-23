@@ -45,6 +45,7 @@ dependencies {
     implementation("org.springframework.security:spring-security-test")
     implementation("io.jsonwebtoken:jjwt:0.9.1")
     implementation("org.springdoc:springdoc-openapi-ui:1.5.2")
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
 }
 
 allOpen {
