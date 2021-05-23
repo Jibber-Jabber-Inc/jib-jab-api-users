@@ -33,12 +33,12 @@ class AuthenticationService(
         val userDetails: UserDetailsImpl = authentication.principal as UserDetailsImpl
         val role: String = userDetails.authorities.first()?.authority ?: throw NotFoundException("Role Not found")
         return LoginResponseDto(
-            userDetails.id,
-            userDetails.username,
-            userDetails.email,
-            role,
-            userDetails.firstName,
-            userDetails.lastName
+            id = userDetails.id,
+            username = userDetails.username,
+            firstName = userDetails.firstName,
+            lastName = userDetails.lastName,
+            email = userDetails.email,
+            role = role,
         )
     }
 

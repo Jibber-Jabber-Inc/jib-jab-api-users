@@ -2,7 +2,7 @@ server:
   error:
     include-message: always
   servlet:
-    context-path: /api
+    context-path: /api/user
   port: 8080
 
 spring:
@@ -14,11 +14,11 @@ spring:
     generate-ddl: true
 
   datasource:
-    url: jdbc:postgresql://localhost:5435/postgres
+    url: jdbc:postgresql://localhost:5431/postgres
     username: postgres
     password: 1234
     driver-class-name: org.postgresql.Driver
     initialization-mode: always
 
-AUTH_PORT: 8080
-AUTH_HOST: localhost
+JJ_SECRET: secret_key
+JJ_EXPIRATION: 1000000000

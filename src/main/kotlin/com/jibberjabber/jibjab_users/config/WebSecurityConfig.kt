@@ -41,7 +41,7 @@ class WebSecurityConfig @Autowired constructor(
     override fun configure(http: HttpSecurity) {
         val repository = CookieCsrfTokenRepository()
         repository.setCookieHttpOnly(true)
-        repository.setSecure(true)
+        repository.setSecure(false)
         http.csrf().disable()
             .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()

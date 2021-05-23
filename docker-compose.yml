@@ -11,7 +11,7 @@ services:
       POSTGRES_PASSWORD: 1234
       POSTGRES_DB: postgres
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - users_data:/var/lib/postgresql/data
 
   api:
     container_name: spring_api_users
@@ -30,5 +30,4 @@ services:
       JJ_EXPIRATION: 1000000000
 
 volumes:
-  pgdata:
-    external: true
+  users_data:
