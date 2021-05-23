@@ -20,5 +20,4 @@ class SessionUtils(
         val found: Optional<User> = userRepository.findFirstByUsername(user.username)
         return found.orElseThrow { throw NotFoundException("Token user not found") }
     }
-
 }

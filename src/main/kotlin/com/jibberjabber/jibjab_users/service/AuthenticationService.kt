@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service
 import javax.annotation.PostConstruct
 import javax.servlet.http.HttpServletResponse
 
-
 @Service
 class AuthenticationService(
     val authenticationManager: AuthenticationManager,
@@ -53,5 +52,4 @@ class AuthenticationService(
             roleRepository.save(userRole)
         }
     }
-
 }

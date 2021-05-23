@@ -64,7 +64,8 @@ class UserService @Autowired constructor(
 
     fun getUserDataById(userId: String): UserDataDto {
         return UserDataDto.from(
-            userRepository.findById(userId).orElseThrow { NotFoundException("User not found for given Id") })
+            userRepository.findById(userId).orElseThrow { NotFoundException("User not found for given Id") }
+        )
     }
 
     fun getAllUsers(): List<User> {
@@ -81,5 +82,4 @@ class UserService @Autowired constructor(
         }
         throw BadRequestException("Invalid Password")
     }
-
 }

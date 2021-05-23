@@ -25,7 +25,9 @@ class AuthTokenFilter(
     }
 
     override fun doFilterInternal(
-        request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain
+        request: HttpServletRequest,
+        response: HttpServletResponse,
+        filterChain: FilterChain
     ) {
         try {
             val jwt = parseJwt(request)

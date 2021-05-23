@@ -59,5 +59,4 @@ class UserDetailsImpl(
     override fun isEnabled(): Boolean {
         return true
     }
-
 }

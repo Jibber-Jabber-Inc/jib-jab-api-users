@@ -46,12 +46,13 @@ class WebSecurityConfig @Autowired constructor(
             .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
             .antMatchers("/auth/*").permitAll()
-            //SWAGGER CONFIG
+            // SWAGGER CONFIG
             .antMatchers(
                 "/webjars/springfox-swagger-ui/**",
                 "/v2/api-docs",
                 "/swagger-resources/**",
-                "/swagger-ui.html").permitAll()
+                "/swagger-ui.html"
+            ).permitAll()
             .anyRequest().authenticated()
             .and().headers().xssProtection()
         http.addFilterBefore(authTokenFilter, UsernamePasswordAuthenticationFilter::class.java)

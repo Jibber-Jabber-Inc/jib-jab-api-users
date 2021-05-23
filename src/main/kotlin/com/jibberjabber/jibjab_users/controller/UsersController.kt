@@ -37,5 +37,4 @@ class UsersController @Autowired constructor(
     fun changeUserPassword(@RequestBody passwordChange: PasswordChangeDto): UserDataDto {
         return userService.changePassword(passwordChange)
     }
-
 }

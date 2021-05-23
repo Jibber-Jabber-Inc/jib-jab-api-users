@@ -7,5 +7,4 @@ import java.util.*
 interface UserRepository : JpaRepository<User, String> {
 
     fun findFirstByUsername(username: String): Optional<User>
-
 }
