@@ -24,7 +24,7 @@ class UserService @Autowired constructor(
     val passwordEncoder: PasswordEncoder
 ) {
 
-    fun registerUser(registerRequest: RegisterRequestDto) {
+    fun registerUser(registerRequest: RegisterRequestDto): User {
         val user = User(
             registerRequest.username,
             registerRequest.email,
@@ -34,7 +34,7 @@ class UserService @Autowired constructor(
             roleRepository.findByUserRoleType(UserRoleType.ROLE_USER)
                 .orElseThrow { RuntimeException("Error: Role not found.") }
         )
-        userRepository.save(user)
+        return userRepository.save(user)
     }
 
     fun editProfile(profileEditDto: ProfileEditDto): UserDataDto {
@@ -58,8 +58,9 @@ class UserService @Autowired constructor(
         throw BadRequestException("Invalid Password")
     }
 
-    val userData: UserDataDto
-        get() = UserDataDto.from(sessionUtils.getTokenUserInformation())
+    fun userData(): UserDataDto {
+        return UserDataDto.from(sessionUtils.getTokenUserInformation())
+    }
 
     fun getUserDataById(userId: String): UserDataDto {
         return UserDataDto.from(

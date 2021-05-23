@@ -9,11 +9,23 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/users")
-class UsersController @Autowired constructor(private val userService: UserService) {
+class UsersController @Autowired constructor(
+    private val userService: UserService
+) {
 
     @GetMapping
     fun getAllUsers(): List<UserDataDto> {
         return userService.getAllUsers().map(UserDataDto::from)
+    }
+
+    @GetMapping("/loggedUser")
+    fun getLoggedUser(): UserDataDto {
+        return userService.userData()
+    }
+
+    @PostMapping("/userInfoById/{userId}")
+    fun getUserInfoById(@PathVariable("userId") userId: String): UserDataDto {
+        return userService.getUserDataById(userId)
     }
 
     @PutMapping("/editProfile")
