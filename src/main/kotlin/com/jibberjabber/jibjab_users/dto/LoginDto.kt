@@ -6,7 +6,7 @@ class LoginDto(
 )
 
 class LoginResponseDto(
-    val userId: String? = null,
+    val id: String? = null,
     val username: String? = null,
     val firstName: String? = null,
     val lastName: String? = null,

@@ -10,11 +10,12 @@ import java.util.*
 
 @Component
 class JwtUtils() {
-    @Value("\${JJ_SECRET}")
-    private val jwtSecret: String? = null
+//    @Value("\${JJ_SECRET}")
+    private val jwtSecret: String = "secret_key"
 
-    @Value("\${JJ_EXPIRATION}")
-    private val jwtExpirationMs = 0
+//    @Value("\${JJ_EXPIRATION}")
+    private val jwtExpirationMs = 1000000000000000000
+
     fun generateJwtToken(authentication: Authentication): String {
         val userPrincipal = authentication.principal as UserDetailsImpl
         return Jwts.builder()

@@ -11,22 +11,22 @@ services:
       POSTGRES_PASSWORD: 1234
       POSTGRES_DB: postgres
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - users_data:/var/lib/postgresql/data
 
-  api:
-    container_name: compose-api
-    build:
-      context: .
-      dockerfile: Dockerfile.multi
-    ports:
-      - 8080:8080
-    environment:
-      DB_USER: postgres
-      DB_PASSWORD: 1234
-      DB_NAME: postgres
-      DB_HOST: postgres_db
-      DB_PORT: 5432
+#  api:
+#    container_name: compose-api
+#    build:
+#      context: .
+#      dockerfile: Dockerfile.multi
+#    ports:
+#      - 8080:8080
+#    environment:
+#      DB_USER: postgres
+#      DB_PASSWORD: 1234
+#      DB_NAME: postgres
+#      DB_HOST: postgres_db
+#      DB_PORT: 5432
+
 
 volumes:
-  pgdata:
-    external: true
+  users_data:

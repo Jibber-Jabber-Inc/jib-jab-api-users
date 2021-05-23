@@ -29,16 +29,16 @@ class AuthenticationService(
         )
         SecurityContextHolder.getContext().authentication = authentication
         val jwt: String = jwtUtils.generateJwtToken(authentication)
-        response.setHeader("Set-Cookie", "jwt=$jwt; HttpOnly; SameSite=strict; Path=/api; Secure")
+        response.setHeader("Set-Cookie", "jwt=$jwt; HttpOnly; SameSite=strict; Path=/api;")
         val userDetails: UserDetailsImpl = authentication.principal as UserDetailsImpl
         val role: String = userDetails.authorities.first()?.authority ?: throw NotFoundException("Role Not found")
         return LoginResponseDto(
-            userDetails.id,
-            userDetails.username,
-            userDetails.email,
-            role,
-            userDetails.firstName,
-            userDetails.lastName
+            id = userDetails.id,
+            username = userDetails.username,
+            firstName = userDetails.firstName,
+            lastName = userDetails.lastName,
+            email = userDetails.email,
+            role = role,
         )
     }
 
