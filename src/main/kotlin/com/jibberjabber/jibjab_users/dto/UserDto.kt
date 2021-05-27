@@ -11,7 +11,7 @@ class ProfileEditDto(
 )
 
 class UserDataDto(
-    val userId: String? = null,
+    val id: String? = null,
     val username: String? = null,
     val email: String? = null,
     val firstName: String? = null,
