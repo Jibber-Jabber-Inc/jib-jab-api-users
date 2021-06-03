@@ -50,6 +50,8 @@ jobs:
           # Strip "v" prefix from tag name
           [[ "${{ github.ref }}" == "refs/tags/"* ]] && BRANCH_NAME=$(echo $BRANCH_NAME | sed -e 's/^v//')
 
+          [ "$BRANCH_NAME" == "master" ] && BRANCH_NAME=production
+
           echo IMAGE_ID=$IMAGE_ID
           echo BRANCH_NAME=$BRANCH_NAME
 
