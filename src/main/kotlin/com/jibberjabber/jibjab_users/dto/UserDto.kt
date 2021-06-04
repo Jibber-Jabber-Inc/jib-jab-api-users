@@ -3,8 +3,6 @@ package com.jibberjabber.jibjab_users.dto
 import com.jibberjabber.jibjab_users.domain.User
 
 class ProfileEditDto(
-    val password: String? = null,
-    val newPassword: String? = null,
     val email: String? = null,
     val firstName: String? = null,
     val lastName: String? = null

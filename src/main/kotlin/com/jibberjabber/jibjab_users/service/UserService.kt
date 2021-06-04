@@ -39,23 +39,17 @@ class UserService @Autowired constructor(
 
     fun editProfile(profileEditDto: ProfileEditDto): UserDataDto {
         val currentUser: User = sessionUtils.getTokenUserInformation()
-        if (passwordEncoder.matches(profileEditDto.password, currentUser.password)) {
-            if (profileEditDto.newPassword != null) {
-                currentUser.password = passwordEncoder.encode(profileEditDto.newPassword)
-            }
-            if (!profileEditDto.email.isNullOrEmpty()) {
-                currentUser.email = profileEditDto.email
-            }
-            if (!profileEditDto.firstName.isNullOrEmpty()) {
-                currentUser.firstName = profileEditDto.firstName
-            }
-            if (!profileEditDto.lastName.isNullOrEmpty()) {
-                currentUser.lastName = profileEditDto.lastName
-            }
-            userRepository.save(currentUser)
-            return UserDataDto.from(currentUser)
+        if (!profileEditDto.email.isNullOrEmpty()) {
+            currentUser.email = profileEditDto.email
         }
-        throw BadRequestException("Invalid Password")
+        if (!profileEditDto.firstName.isNullOrEmpty()) {
+            currentUser.firstName = profileEditDto.firstName
+        }
+        if (!profileEditDto.lastName.isNullOrEmpty()) {
+            currentUser.lastName = profileEditDto.lastName
+        }
+        userRepository.save(currentUser)
+        return UserDataDto.from(currentUser)
     }
 
     fun userData(): UserDataDto {
