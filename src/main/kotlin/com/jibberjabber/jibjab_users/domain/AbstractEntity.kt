@@ -14,12 +14,3 @@ abstract class AbstractEntity(
     @Column(name = "id")
     var id: String? = null
 )
-
-@MappedSuperclass
-abstract class AbstractEntityId(
-    @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid")
-    @Column(name = "id")
-    var id: String
-)

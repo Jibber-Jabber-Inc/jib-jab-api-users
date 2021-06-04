@@ -7,8 +7,10 @@ import java.util.*
 
 interface FollowUserRepository : JpaRepository<FollowUser, String> {
 
-    fun findFirstByIdAndFollowUserId(userId: String, followUserId: String) : Optional<FollowUser>
+    fun findFirstByUserIdAndFollowUserId(userId: String, followUserId: String) : Optional<FollowUser>
 
-    fun findAllById(userId: String) : List<FollowUser>
+    fun findAllByUserId(userId: String) : List<FollowUser>
+
+    fun deleteByUserIdAndFollowUserId(userId: String, followUserId: String)
 
 }

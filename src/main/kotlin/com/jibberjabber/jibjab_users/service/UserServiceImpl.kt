@@ -90,15 +90,15 @@ class UserServiceImpl @Autowired constructor(
     fun followUser(userId: String) {
         val currentUser: User = sessionUtils.getTokenUserInformation()
         val followUser: User = userRepository.findById(userId).orElseThrow()
-        val optional = followUserRepository.findFirstByIdAndFollowUserId(currentUser.id!!, userId)
-        if (optional.isPresent) followUserRepository.deleteById(optional.get().id)
+        val optional = followUserRepository.findFirstByUserIdAndFollowUserId(currentUser.id!!, userId)
+        if (optional.isPresent) followUserRepository.deleteById(optional.get().id!!)
         else followUserRepository.save(FollowUser(currentUser.id!!, followUser))
     }
 
     override
     fun getFollowedUsersInfo(): UserDataDtoList {
         val currentUser: User = sessionUtils.getTokenUserInformation()
-        val userInfoDto: List<User> = followUserRepository.findAllById(currentUser.id!!).map { fu -> fu.followUser }
+        val userInfoDto: List<User> = followUserRepository.findAllByUserId(currentUser.id!!).map { fu -> fu.followUser }
         return UserDataDtoList(userInfoDto.map { u -> UserDataDto.from(u) })
     }
 }

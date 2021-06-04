@@ -16,9 +16,9 @@ class User(
 @Table(name = "follow_user")
 @Entity
 class FollowUser(
-    override var id: String,
+    var userId: String,
     @ManyToOne var followUser: User
-) : AbstractEntityId(id)
+) : AbstractEntity()
 
 
 @Table(name = "user_role")
