@@ -31,7 +31,6 @@ class AuthController @Autowired constructor(
     @PostMapping("/logout")
     fun logOut(response: HttpServletResponse): ResponseEntity<Unit> {
         response.addHeader("Set-Cookie", "jwt=deleted; httpOnly; SameSite=strict; Path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT")
-        response.addHeader("Set-Cookie", "google-auth=deleted; httpOnly; SameSite=strict; Path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT")
         return ResponseEntity.noContent().build()
     }
 }

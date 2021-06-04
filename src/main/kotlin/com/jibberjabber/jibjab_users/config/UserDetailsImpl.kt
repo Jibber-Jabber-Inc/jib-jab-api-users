@@ -27,7 +27,7 @@ class UserDetailsImpl(
                 user.firstName,
                 user.lastName,
                 user.password,
-                listOf(SimpleGrantedAuthority(user.role.userRoleType.name))
+                listOf(SimpleGrantedAuthority(user.userRole.userRoleType.name))
             )
         }
     }

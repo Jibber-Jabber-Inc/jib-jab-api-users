@@ -6,6 +6,7 @@ import com.jibberjabber.jibjab_users.dto.UserDataDto
 import com.jibberjabber.jibjab_users.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("/users")
@@ -23,18 +24,23 @@ class UsersController @Autowired constructor(
         return userService.userData()
     }
 
-    @PostMapping("/userInfoById/{userId}")
+    @GetMapping("/info/{userId}")
     fun getUserInfoById(@PathVariable("userId") userId: String): UserDataDto {
         return userService.getUserDataById(userId)
     }
 
     @PutMapping("/editProfile")
-    fun changeUserProfile(@RequestBody profileEditDto: ProfileEditDto): UserDataDto {
+    fun changeUserProfile(@RequestBody @Valid profileEditDto: ProfileEditDto): UserDataDto {
         return userService.editProfile(profileEditDto)
     }
 
     @PutMapping("/editPassword")
-    fun changeUserPassword(@RequestBody passwordChange: PasswordChangeDto): UserDataDto {
+    fun changeUserPassword(@RequestBody @Valid passwordChange: PasswordChangeDto): UserDataDto {
         return userService.changePassword(passwordChange)
+    }
+
+    @PostMapping("/follow/{userId}")
+    fun followUser(@PathVariable("userId") userId: String) {
+        userService.followUser(userId)
     }
 }
