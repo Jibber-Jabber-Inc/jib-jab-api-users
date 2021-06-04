@@ -3,10 +3,7 @@ package com.jibberjabber.jibjab_users.service
 import com.jibberjabber.jibjab_users.domain.FollowUser
 import com.jibberjabber.jibjab_users.domain.User
 import com.jibberjabber.jibjab_users.domain.UserRoleType
-import com.jibberjabber.jibjab_users.dto.PasswordChangeDto
-import com.jibberjabber.jibjab_users.dto.ProfileEditDto
-import com.jibberjabber.jibjab_users.dto.RegisterRequestDto
-import com.jibberjabber.jibjab_users.dto.UserDataDto
+import com.jibberjabber.jibjab_users.dto.*
 import com.jibberjabber.jibjab_users.exception.BadRequestException
 import com.jibberjabber.jibjab_users.exception.NotFoundException
 import com.jibberjabber.jibjab_users.repository.FollowUserRepository
@@ -96,5 +93,12 @@ class UserServiceImpl @Autowired constructor(
         val optional = followUserRepository.findFirstByIdAndFollowUserId(currentUser.id!!, userId)
         if (optional.isPresent) followUserRepository.deleteById(optional.get().id)
         else followUserRepository.save(FollowUser(currentUser.id!!, followUser))
+    }
+
+    override
+    fun getFollowedUsersInfo(): UserDataDtoList {
+        val currentUser: User = sessionUtils.getTokenUserInformation()
+        val userInfoDto: List<User> = followUserRepository.findAllById(currentUser.id!!).map { fu -> fu.followUser }
+        return UserDataDtoList(userInfoDto.map { u -> UserDataDto.from(u) })
     }
 }

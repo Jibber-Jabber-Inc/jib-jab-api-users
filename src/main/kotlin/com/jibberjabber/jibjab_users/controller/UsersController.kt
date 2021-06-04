@@ -3,10 +3,12 @@ package com.jibberjabber.jibjab_users.controller
 import com.jibberjabber.jibjab_users.dto.PasswordChangeDto
 import com.jibberjabber.jibjab_users.dto.ProfileEditDto
 import com.jibberjabber.jibjab_users.dto.UserDataDto
+import com.jibberjabber.jibjab_users.dto.UserDataDtoList
 import com.jibberjabber.jibjab_users.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
+
 
 @RestController
 @RequestMapping("/users")
@@ -42,5 +44,10 @@ class UsersController @Autowired constructor(
     @PostMapping("/follow/{userId}")
     fun followUser(@PathVariable("userId") userId: String) {
         userService.followUser(userId)
+    }
+
+    @GetMapping("/followedUsers")
+    fun getFollowedUsersInfo(): UserDataDtoList {
+        return userService.getFollowedUsersInfo()
     }
 }

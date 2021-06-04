@@ -1,10 +1,7 @@
 package com.jibberjabber.jibjab_users.service
 
 import com.jibberjabber.jibjab_users.domain.User
-import com.jibberjabber.jibjab_users.dto.PasswordChangeDto
-import com.jibberjabber.jibjab_users.dto.ProfileEditDto
-import com.jibberjabber.jibjab_users.dto.RegisterRequestDto
-import com.jibberjabber.jibjab_users.dto.UserDataDto
+import com.jibberjabber.jibjab_users.dto.*
 import org.springframework.stereotype.Service
 
 @Service
@@ -23,4 +20,6 @@ interface UserService {
     fun changePassword(passwordChange: PasswordChangeDto): UserDataDto
 
     fun followUser(userId: String)
+
+    fun getFollowedUsersInfo(): UserDataDtoList
 }

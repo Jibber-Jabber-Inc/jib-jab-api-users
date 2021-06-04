@@ -9,4 +9,6 @@ interface FollowUserRepository : JpaRepository<FollowUser, String> {
 
     fun findFirstByIdAndFollowUserId(userId: String, followUserId: String) : Optional<FollowUser>
 
+    fun findAllById(userId: String) : List<FollowUser>
+
 }
