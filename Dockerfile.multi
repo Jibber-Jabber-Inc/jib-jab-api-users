@@ -13,7 +13,7 @@ RUN gradle clean build --no-daemon > /dev/null 2>&1 || true
 COPY ./ /home/gradle/src/
 
 # Do the actual build
-RUN gradle clean build --no-daemon
+RUN gradle build --no-daemon -x test
 
 FROM openjdk:11-jre-slim
 
