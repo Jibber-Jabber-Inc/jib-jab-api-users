@@ -4,15 +4,10 @@ on:
   push:
     # Publish `master` as Docker `latest` image.
     branches:
-      - develop
       - master
 
-    # Publish `v1.2.3` tags as releases.
-    tags:
-      - v*
-
 env:
-  IMAGE_NAME: jibjab_users
+  IMAGE_NAME: jibjab_posts
 
 jobs:
   # Push image to GitHub Packages.
@@ -54,3 +49,24 @@ jobs:
 
           docker tag $IMAGE_NAME $IMAGE_ID-$BRANCH_NAME:latest
           docker push $IMAGE_ID-$BRANCH_NAME:latest
+  azure-deploy:
+    needs: push
+    name: Deploy to Azure VM
+    runs-on: ubuntu-latest
+    steps:
+      - name: Connecting with SSH to Azure VM
+        uses: appleboy/ssh-action@master
+        env:
+          REPO_OWNER: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          username: ${{ secrets.VM_USERNAME }}
+          host: ${{ secrets.VM_PUBLIC_IP_PROD }}
+          key: ${{ secrets.VM_SSH_PRIVATE_KEY_DEV }}
+          envs: REPO_OWNER, GITHUB_TOKEN
+          script: |
+            cd jib-jab-infra
+            sudo aa-remove-unknown
+            sudo docker login docker.pkg.github.com --username $REPO_OWNER --password $GITHUB_TOKEN
+            sudo docker-compose -f docker-compose.yml pull
+            sudo docker-compose -f docker-compose.yml up -d --build
