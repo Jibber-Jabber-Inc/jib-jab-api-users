@@ -7,6 +7,7 @@ import com.jibberjabber.jibjab_users.dto.UserDataDto
 import com.jibberjabber.jibjab_users.service.AuthenticationService
 import com.jibberjabber.jibjab_users.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import javax.servlet.http.HttpServletResponse
 
@@ -27,8 +28,9 @@ class AuthController @Autowired constructor(
         return UserDataDto.from(userService.registerUser(registerRequest))
     }
 
-    @GetMapping("/hello")
-    fun hello(): String {
-        return "hello"
+    @PostMapping("/logout")
+    fun logOut(response: HttpServletResponse): ResponseEntity<Unit> {
+        response.addHeader("Set-Cookie", "jwt=deleted; httpOnly; SameSite=strict; Path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT")
+        return ResponseEntity.noContent().build()
     }
 }

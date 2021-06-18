@@ -14,6 +14,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository
+import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource
+import org.springframework.web.filter.CorsFilter
 
 @Configuration
 @EnableWebSecurity
@@ -47,12 +50,7 @@ class WebSecurityConfig @Autowired constructor(
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
             .antMatchers("/auth/*").permitAll()
             // SWAGGER CONFIG
-            .antMatchers(
-                "/webjars/springfox-swagger-ui/**",
-                "/v2/api-docs",
-                "/swagger-resources/**",
-                "/swagger-ui.html"
-            ).permitAll()
+            .antMatchers("/v3/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui/**", "/swagger-ui.html", "/webjars/**","/swagger-resources/configuration/ui","/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
             .anyRequest().authenticated()
             .and().headers().xssProtection()
         http.addFilterBefore(authTokenFilter, UsernamePasswordAuthenticationFilter::class.java)

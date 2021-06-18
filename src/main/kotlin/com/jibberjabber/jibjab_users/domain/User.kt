@@ -10,8 +10,16 @@ class User(
     var password: String,
     var firstName: String,
     var lastName: String,
-    @ManyToOne @JoinColumn(name = "user_role_id") val role: UserRole
+    @ManyToOne val userRole: UserRole
 ) : AbstractEntity()
+
+@Table(name = "follow_user")
+@Entity
+class FollowUser(
+    var userId: String,
+    @ManyToOne var followUser: User
+) : AbstractEntity()
+
 
 @Table(name = "user_role")
 @Entity
