@@ -2,7 +2,7 @@ name: Docker publish
 
 on:
   push:
-    # Publish `master` as Docker `latest` image.
+    # Publish `develop`
     branches:
       - develop
 
